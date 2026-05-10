@@ -382,6 +382,11 @@ if page == "🏠 Home":
     </div>
     """, unsafe_allow_html=True)
 
+
+    import os
+    st.write(os.path.exists("models/class_2/best.pt"))
+    st.write(os.path.exists("models/detection/best.pt"))
+
     col1, col2, col3, col4 = st.columns(4)
     for col, (val, label) in zip([col1,col2,col3,col4], [
         (st.session_state.total_scans, "Total Scans"),
