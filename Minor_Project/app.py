@@ -388,10 +388,10 @@ if page == "🏠 Home":
     """, unsafe_allow_html=True)
 
 
-    # import os
-    # st.write("Current working dir:", os.getcwd())
-    # st.write("Files in root:", os.listdir("."))
-    # st.write("Files in /app:", os.listdir("/app") if os.path.exists("/app") else "not found")
+    import os
+    st.write("Current working dir:", os.getcwd())
+    st.write("Files in root:", os.listdir("."))
+    st.write("Files in /app:", os.listdir("/app") if os.path.exists("/app") else "not found")
 
     col1, col2, col3, col4 = st.columns(4)
     for col, (val, label) in zip([col1,col2,col3,col4], [
