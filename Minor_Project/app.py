@@ -756,18 +756,18 @@ elif page == "🔬 Detection":
 
         image = None
 
-        if input_method == "📁 Upload Image":
-            uploaded = st.file_uploader(
-                "Choose image", type=["jpg","jpeg","png","webp"],
-                label_visibility="collapsed"
-            )
-            if uploaded:
-                image = Image.open(uploaded).convert("RGB")
+        # if input_method == "📁 Upload Image":
+        #     uploaded = st.file_uploader(
+        #         "Choose image", type=["jpg","jpeg","png","webp"],
+        #         label_visibility="collapsed"
+        #     )
+        #     if uploaded:
+        #         image = Image.open(uploaded).convert("RGB")
 
-        elif input_method == "📸 Use Camera":
-            camera_shot = st.camera_input("Take a photo")
-            if camera_shot:
-                image = Image.open(camera_shot).convert("RGB")
+        # elif input_method == "📸 Use Camera":
+        #     camera_shot = st.camera_input("Take a photo")
+        #     if camera_shot:
+        #         image = Image.open(camera_shot).convert("RGB")
 
       
         # current_file = (
@@ -784,6 +784,32 @@ elif page == "🔬 Detection":
         #     st.session_state["overlay_stats"]     = None
         #     st.session_state["detection_done"]    = False
 
+        # if input_method == "📁 Upload Image" and uploaded:
+        #     current_file = file_hash(uploaded)
+        # elif input_method == "📸 Use Camera" and camera_shot:
+        #     current_file = file_hash(camera_shot)
+        # else:
+        #     current_file = None
+        
+        # prev_file = st.session_state.get("uploaded_filename")
+        # if current_file != prev_file:
+        #         st.session_state["uploaded_filename"]  = current_file
+        #         st.session_state["last_result"]        = None
+        #         st.session_state["show_overlay"]       = False
+        #         st.session_state["overlay_image"]      = None
+        #         st.session_state["overlay_stats"]      = None
+        #         st.session_state["detection_done"]     = False
+
+        if input_method == "📁 Upload Image":
+            uploaded = st.file_uploader(
+                "Choose image", type=["jpg","jpeg","png","webp"],
+                label_visibility="collapsed"
+            )
+        
+        elif input_method == "📸 Use Camera":
+            camera_shot = st.camera_input("Take a photo")
+        
+        # ── Hash check FIRST, before opening image ──────────────────────
         if input_method == "📁 Upload Image" and uploaded:
             current_file = file_hash(uploaded)
         elif input_method == "📸 Use Camera" and camera_shot:
@@ -793,12 +819,19 @@ elif page == "🔬 Detection":
         
         prev_file = st.session_state.get("uploaded_filename")
         if current_file != prev_file:
-                st.session_state["uploaded_filename"]  = current_file
-                st.session_state["last_result"]        = None
-                st.session_state["show_overlay"]       = False
-                st.session_state["overlay_image"]      = None
-                st.session_state["overlay_stats"]      = None
-                st.session_state["detection_done"]     = False
+            st.session_state["uploaded_filename"] = current_file
+            st.session_state["last_result"]       = None
+            st.session_state["show_overlay"]      = False
+            st.session_state["overlay_image"]     = None
+            st.session_state["overlay_stats"]     = None
+            st.session_state["detection_done"]    = False
+        
+        # ── Open image AFTER hash check ──────────────────────────────────
+        image = None
+        if input_method == "📁 Upload Image" and uploaded:
+            image = Image.open(uploaded).convert("RGB")
+        elif input_method == "📸 Use Camera" and camera_shot:
+            image = Image.open(camera_shot).convert("RGB")
 
         if image:
             crop_toggle = st.checkbox("✂️ Crop image to focus on diseased area (optional)")
