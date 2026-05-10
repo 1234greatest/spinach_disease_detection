@@ -767,19 +767,35 @@ elif page == "🔬 Detection":
                 image = Image.open(camera_shot).convert("RGB")
 
       
-        current_file = (
-            uploaded.name if input_method == "📁 Upload Image" and uploaded
-            else "camera" if input_method == "📸 Use Camera" and camera_shot
-            else None
-        )
+        # current_file = (
+        #     uploaded.name if input_method == "📁 Upload Image" and uploaded
+        #     else "camera" if input_method == "📸 Use Camera" and camera_shot
+        #     else None
+        # )
+        # prev_file = st.session_state.get("uploaded_filename")
+        # if current_file != prev_file:
+        #     st.session_state["uploaded_filename"] = current_file
+        #     st.session_state["last_result"]       = None
+        #     st.session_state["show_overlay"]      = False
+        #     st.session_state["overlay_image"]     = None
+        #     st.session_state["overlay_stats"]     = None
+        #     st.session_state["detection_done"]    = False
+
+        if input_method == "📁 Upload Image" and uploaded:
+            current_file = file_hash(uploaded)
+        elif input_method == "📸 Use Camera" and camera_shot:
+            current_file = file_hash(camera_shot)
+        else:
+            current_file = None
+        
         prev_file = st.session_state.get("uploaded_filename")
         if current_file != prev_file:
-            st.session_state["uploaded_filename"] = current_file
-            st.session_state["last_result"]       = None
-            st.session_state["show_overlay"]      = False
-            st.session_state["overlay_image"]     = None
-            st.session_state["overlay_stats"]     = None
-            st.session_state["detection_done"]    = False
+                st.session_state["uploaded_filename"]  = current_file
+                st.session_state["last_result"]        = None
+                st.session_state["show_overlay"]       = False
+                st.session_state["overlay_image"]      = None
+                st.session_state["overlay_stats"]      = None
+                st.session_state["detection_done"]     = False
 
         if image:
             crop_toggle = st.checkbox("✂️ Crop image to focus on diseased area (optional)")
