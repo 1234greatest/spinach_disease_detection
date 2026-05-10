@@ -15,6 +15,8 @@ import plotly.express as px
 import pandas as pd
 import logging
 from streamlit_cropper import st_cropper
+import hashlib
+
 
 # ─── YOLO Model loaders ───────────────────────────────────────────────────────
 @st.cache_resource
