@@ -307,23 +307,7 @@ def ai_facilitator_stream(user_message, chat_history, last_result):
 import os
 from pathlib import Path
  
-# def load_sample_images(folder: str) -> list:
-#     """
-#     Returns a list of PIL Images found in the given subfolder of samples/.
-#     Returns an empty list (not an error) if the folder doesn't exist yet.
-#     """
-#     base = Path("samples") / folder
-#     if not base.exists():
-#         return []
-#     exts = {".jpg", ".jpeg", ".png", ".webp"}
-#     paths = sorted([p for p in base.iterdir() if p.suffix.lower() in exts])
-#     images = []
-#     for p in paths:
-#         try:
-#             images.append((p.name, Image.open(p).convert("RGB")))
-#         except Exception:
-#             pass  
-#     return images
+
 
 def load_sample_images(folder: str) -> list:
     base = Path(BASE_DIR) / "samples" / folder   # ← use BASE_DIR, not relative "samples"
@@ -403,10 +387,9 @@ if page == "🏠 Home":
     """, unsafe_allow_html=True)
 
 
-    # import os
-    # st.write("Current working dir:", os.getcwd())
-    # st.write("Files in root:", os.listdir("."))
-    # st.write("Files in /app:", os.listdir("/app") if os.path.exists("/app") else "not found")
+    import os
+    st.write(os.path.exists("models/class_2/best.pt"))
+    st.write(os.path.exists("models/detection/best.pt"))
 
     col1, col2, col3, col4 = st.columns(4)
     for col, (val, label) in zip([col1,col2,col3,col4], [
