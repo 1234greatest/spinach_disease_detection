@@ -370,18 +370,67 @@ with st.sidebar:
     ])
 
     st.markdown("<hr style='border-color:#2a5c3a; margin:1rem 0;'/>", unsafe_allow_html=True)
+    # st.markdown(f"""
+    # <div style='font-size:0.78rem; color:#6a9a78;'>
+    # <b style='color:#a8e6bf;'>Session Stats</b><br/>
+    # Total Scans: <b style='color:#d4eadb;'>{st.session_state.total_scans}</b><br/>
+    # Infected Scans: <b style='color:#f5b7b1;'>{st.session_state.disease_count}</b><br/>
+    # Chat Messages: <b style='color:#d4eadb;'>{len(st.session_state.chat_history)}</b>
+    # </div>
+    # <hr style='border-color:#2a5c3a; margin:1rem 0;'/>
+    # <div style='font-size:0.68rem; color:#4a7a5a; text-align:center;'>
+    # Spinacia oleracea · Peronospora effusa<br/>
+    # Western Maharashtra Research Tool<br/>
+    # Dr. Madhuri Pant — Pathology Lab
+    # </div>
+    # """, unsafe_allow_html=True)
+
+
+   # ── Model Status ──────────────────────────────────────────────────────────
+    clf_ok = os.path.exists(os.path.join(BASE_DIR, "models", "class_2", "best.pt"))
+    det_ok = os.path.exists(os.path.join(BASE_DIR, "models", "detection", "best.pt"))
+
     st.markdown(f"""
-    <div style='font-size:0.78rem; color:#6a9a78;'>
-    <b style='color:#a8e6bf;'>Session Stats</b><br/>
-    Total Scans: <b style='color:#d4eadb;'>{st.session_state.total_scans}</b><br/>
-    Infected Scans: <b style='color:#f5b7b1;'>{st.session_state.disease_count}</b><br/>
-    Chat Messages: <b style='color:#d4eadb;'>{len(st.session_state.chat_history)}</b>
-    </div>
     <hr style='border-color:#2a5c3a; margin:1rem 0;'/>
-    <div style='font-size:0.68rem; color:#4a7a5a; text-align:center;'>
-    Spinacia oleracea · Peronospora effusa<br/>
-    Western Maharashtra Research Tool<br/>
-    Dr. Madhuri Pant — Pathology Lab
+    <div style='font-size:0.75rem; color:#6a9a78; margin-bottom:0.6rem;'>
+        <b style='color:#a8e6bf; font-size:0.78rem;'>System Status</b>
+    </div>
+    <div style='display:flex; flex-direction:column; gap:5px; margin-bottom:0.8rem;'>
+        <div style='display:flex; align-items:center; gap:6px; font-size:0.74rem;'>
+            <span style='width:7px; height:7px; border-radius:50%;
+                         background:{"#4caf7d" if clf_ok else "#d94f3d"};
+                         flex-shrink:0; box-shadow:0 0 5px {"#4caf7d" if clf_ok else "#d94f3d"};'></span>
+            <span style='color:#c0d8c8;'>Stage 1 Classifier</span>
+            <span style='color:{"#4caf7d" if clf_ok else "#d94f3d"}; margin-left:auto; font-weight:600;'>
+                {"READY" if clf_ok else "MISSING"}
+            </span>
+        </div>
+        <div style='display:flex; align-items:center; gap:6px; font-size:0.74rem;'>
+            <span style='width:7px; height:7px; border-radius:50%;
+                         background:{"#4caf7d" if det_ok else "#d94f3d"};
+                         flex-shrink:0; box-shadow:0 0 5px {"#4caf7d" if det_ok else "#d94f3d"};'></span>
+            <span style='color:#c0d8c8;'>Stage 2 Detector</span>
+            <span style='color:{"#4caf7d" if det_ok else "#d94f3d"}; margin-left:auto; font-weight:600;'>
+                {"READY" if det_ok else "MISSING"}
+            </span>
+        </div>
+        <div style='display:flex; align-items:center; gap:6px; font-size:0.74rem;'>
+            <span style='width:7px; height:7px; border-radius:50%;
+                         background:#4caf7d; flex-shrink:0;
+                         box-shadow:0 0 5px #4caf7d;'></span>
+            <span style='color:#c0d8c8;'>App</span>
+            <span style='color:#4caf7d; margin-left:auto; font-weight:600;'>LIVE</span>
+        </div>
+    </div>
+    <hr style='border-color:#2a5c3a; margin:0.8rem 0;'/>
+    <div style='font-size:0.68rem; color:#4a7a5a; text-align:center; line-height:1.9;'>
+        Spinacia oleracea · Peronospora effusa<br/>
+        Western Maharashtra Research Tool<br/>
+        Dr. Madhuri Pant — Pathology Lab
+    </div>
+    <div style='text-align:center; margin-top:0.8rem; font-size:0.75rem; color:#6a9a78;'>
+        Made with <span style='color:#e05c5c; font-size:0.85rem;'>♥</span> for
+        <span style='font-size:0.9rem;'>🇮🇳</span> India
     </div>
     """, unsafe_allow_html=True)
 
