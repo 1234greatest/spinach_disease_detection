@@ -321,6 +321,9 @@ def load_sample_images(folder: str) -> list:
     return images
 
 
+def file_hash(file_obj):
+    return hashlib.md5(file_obj.getvalue()).hexdigest()
+
 
 # ─── Sidebar ──────────────────────────────────────────────────────────────────
 with st.sidebar:
