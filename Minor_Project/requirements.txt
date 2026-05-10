@@ -1,2 +1,3 @@
 plotly
 streamlit_cropper
+matplotlib
