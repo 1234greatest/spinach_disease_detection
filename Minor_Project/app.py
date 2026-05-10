@@ -34,7 +34,7 @@ def load_disease_model():
         return None
 
 # ─── Groq Config ──────────────────────────────────────────────────────────────
-GROQ_API_KEY = "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"
+GROQ_API_KEY = st.secrets["MY_API_KEY"]
 GROQ_MODEL   = "llama-3.3-70b-versatile"
 
 # ─── Page Config ──────────────────────────────────────────────────────────────
