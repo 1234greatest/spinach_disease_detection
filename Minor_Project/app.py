@@ -384,8 +384,9 @@ if page == "🏠 Home":
 
 
     import os
-    st.write(os.path.exists("models/class_2/best.pt"))
-    st.write(os.path.exists("models/detection/best.pt"))
+    st.write("Current working dir:", os.getcwd())
+    st.write("Files in root:", os.listdir("."))
+    st.write("Files in /app:", os.listdir("/app") if os.path.exists("/app") else "not found")
 
     col1, col2, col3, col4 = st.columns(4)
     for col, (val, label) in zip([col1,col2,col3,col4], [
