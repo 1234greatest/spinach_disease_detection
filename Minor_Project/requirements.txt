@@ -1,3 +1,6 @@
 plotly
 streamlit_cropper
 matplotlib
+torch
+torchvision
+ultralytics
