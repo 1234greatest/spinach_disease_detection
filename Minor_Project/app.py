@@ -321,8 +321,6 @@ def ai_facilitator_stream(user_message, chat_history, last_result):
 import os
 from pathlib import Path
  
-
-
 def load_sample_images(folder: str) -> list:
     base = Path(BASE_DIR) / "samples" / folder   # ← use BASE_DIR, not relative "samples"
     if not base.exists():
@@ -450,10 +448,7 @@ if page == "🏠 Home":
     """, unsafe_allow_html=True)
 
 
-    # Replace your current debug lines with this:
-    st.write("BASE_DIR:", BASE_DIR)
-    st.write("Model 1 exists:", os.path.exists(os.path.join(BASE_DIR, "models", "class_2", "best.pt")))
-    st.write("Model 2 exists:", os.path.exists(os.path.join(BASE_DIR, "models", "detection", "best.pt")))
+    
 
     
     col1, col2, col3, col4 = st.columns(4)
