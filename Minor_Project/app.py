@@ -22,23 +22,37 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # ─── YOLO Model loaders ───────────────────────────────────────────────────────
+# @st.cache_resource
+# def load_classification_model():
+#     try:
+#         from ultralytics import YOLO
+#         path = os.path.join(BASE_DIR, "models", "class_2", "best.pt")
+#         return YOLO(path)
+#     except Exception as e:
+#         return None
+
+# @st.cache_resource
+# def load_disease_model():
+#     try:
+#         from ultralytics import YOLO
+#         path = os.path.join(BASE_DIR, "models", "detection", "best.pt")
+#         return YOLO(path)
+#     except Exception as e:
+#         return None
+
+
 @st.cache_resource
 def load_classification_model():
-    try:
-        from ultralytics import YOLO
-        path = os.path.join(BASE_DIR, "models", "class_2", "best.pt")
-        return YOLO(path)
-    except Exception as e:
-        return None
+    from ultralytics import YOLO
+    path = os.path.join(BASE_DIR, "models", "class_2", "best.pt")
+    return YOLO(path)
 
 @st.cache_resource
 def load_disease_model():
-    try:
-        from ultralytics import YOLO
-        path = os.path.join(BASE_DIR, "models", "detection", "best.pt")
-        return YOLO(path)
-    except Exception as e:
-        return None
+    from ultralytics import YOLO
+    path = os.path.join(BASE_DIR, "models", "detection", "best.pt")
+    return YOLO(path)
+    
 
 # ─── Groq Config ──────────────────────────────────────────────────────────────
 GROQ_API_KEY = st.secrets["MY_API_KEY"]
