@@ -322,7 +322,10 @@ def load_sample_images(folder: str) -> list:
 
 
 def file_hash(file_obj):
-    return hashlib.md5(file_obj.getvalue()).hexdigest()
+    file_obj.seek(0)
+    h = hashlib.md5(file_obj.read()).hexdigest()
+    file_obj.seek(0)  # reset again so Image.open() works after
+    return h
 
 
 # ─── Sidebar ──────────────────────────────────────────────────────────────────
