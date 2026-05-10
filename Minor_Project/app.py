@@ -800,23 +800,26 @@ elif page == "🔬 Detection":
         #         st.session_state["overlay_stats"]      = None
         #         st.session_state["detection_done"]     = False
 
+       # Initialize both to None first
+        uploaded    = None
+        camera_shot = None
+
         if input_method == "📁 Upload Image":
             uploaded = st.file_uploader(
                 "Choose image", type=["jpg","jpeg","png","webp"],
                 label_visibility="collapsed"
             )
-        
         elif input_method == "📸 Use Camera":
             camera_shot = st.camera_input("Take a photo")
-        
-        # ── Hash check FIRST, before opening image ──────────────────────
-        if input_method == "📁 Upload Image" and uploaded:
+
+        # ── Hash check FIRST, before opening image ────────────────────────
+        if uploaded is not None:
             current_file = file_hash(uploaded)
-        elif input_method == "📸 Use Camera" and camera_shot:
+        elif camera_shot is not None:
             current_file = file_hash(camera_shot)
         else:
             current_file = None
-        
+
         prev_file = st.session_state.get("uploaded_filename")
         if current_file != prev_file:
             st.session_state["uploaded_filename"] = current_file
@@ -825,13 +828,14 @@ elif page == "🔬 Detection":
             st.session_state["overlay_image"]     = None
             st.session_state["overlay_stats"]     = None
             st.session_state["detection_done"]    = False
-        
-        # ── Open image AFTER hash check ──────────────────────────────────
+
+        # ── Open image AFTER hash check ───────────────────────────────────
         image = None
-        if input_method == "📁 Upload Image" and uploaded:
+        if uploaded is not None:
             image = Image.open(uploaded).convert("RGB")
-        elif input_method == "📸 Use Camera" and camera_shot:
+        elif camera_shot is not None:
             image = Image.open(camera_shot).convert("RGB")
+            
 
         if image:
             crop_toggle = st.checkbox("✂️ Crop image to focus on diseased area (optional)")
