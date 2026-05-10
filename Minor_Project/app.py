@@ -18,12 +18,16 @@ from streamlit_cropper import st_cropper
 import hashlib
 
 
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # ─── YOLO Model loaders ───────────────────────────────────────────────────────
 @st.cache_resource
 def load_classification_model():
     try:
         from ultralytics import YOLO
-        return YOLO("models/class_2/best.pt")
+        path = os.path.join(BASE_DIR, "models", "class_2", "best.pt")
+        return YOLO(path)
     except Exception as e:
         return None
 
@@ -31,7 +35,8 @@ def load_classification_model():
 def load_disease_model():
     try:
         from ultralytics import YOLO
-        return YOLO("models/detection/best.pt")
+        path = os.path.join(BASE_DIR, "models", "detection", "best.pt")
+        return YOLO(path)
     except Exception as e:
         return None
 
@@ -383,10 +388,10 @@ if page == "🏠 Home":
     """, unsafe_allow_html=True)
 
 
-    import os
-    st.write("Current working dir:", os.getcwd())
-    st.write("Files in root:", os.listdir("."))
-    st.write("Files in /app:", os.listdir("/app") if os.path.exists("/app") else "not found")
+    # import os
+    # st.write("Current working dir:", os.getcwd())
+    # st.write("Files in root:", os.listdir("."))
+    # st.write("Files in /app:", os.listdir("/app") if os.path.exists("/app") else "not found")
 
     col1, col2, col3, col4 = st.columns(4)
     for col, (val, label) in zip([col1,col2,col3,col4], [
