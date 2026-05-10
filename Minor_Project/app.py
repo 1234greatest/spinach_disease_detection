@@ -387,10 +387,12 @@ if page == "🏠 Home":
     """, unsafe_allow_html=True)
 
 
-    import os
-    st.write(os.path.exists("models/class_2/best.pt"))
-    st.write(os.path.exists("models/detection/best.pt"))
+    # Replace your current debug lines with this:
+    st.write("BASE_DIR:", BASE_DIR)
+    st.write("Model 1 exists:", os.path.exists(os.path.join(BASE_DIR, "models", "class_2", "best.pt")))
+    st.write("Model 2 exists:", os.path.exists(os.path.join(BASE_DIR, "models", "detection", "best.pt")))
 
+    
     col1, col2, col3, col4 = st.columns(4)
     for col, (val, label) in zip([col1,col2,col3,col4], [
         (st.session_state.total_scans, "Total Scans"),
