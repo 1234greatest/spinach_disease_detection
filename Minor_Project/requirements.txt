@@ -4,3 +4,4 @@ matplotlib
 torch
 torchvision
 ultralytics
+opencv-python-headless
