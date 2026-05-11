@@ -2163,15 +2163,19 @@ elif page == "ℹ️ About":
         st.markdown("""
         <div class="card">
             <div class="card-title">Research Background</div>
-            <p style="color:#444; line-height:1.9; font-size:0.92rem;">
-            This project is part of ongoing plant pathology research at the Department of Plant Pathology. The study focuses on:
-            </p>
+               <p style="color:#444; line-height:1.9; font-size:0.92rem;">
+                This project was developed as a <b>Minor Project</b> in the third year of the
+                BSc Computer Science programme at <b>Vishwakarma University</b>, under the
+                supervision of <b>Dr. Madhuri Pant</b>, Faculty of Science and Technology.
+                The project applies computer vision and AI to address a real agricultural
+                challenge facing spinach farmers in Western Maharashtra. The work focuses on:
+                </p>
             <ul style="color:#444; line-height:2.0; font-size:0.9rem;">
-                <li>Epidemiology of spinach Downy Mildew in Western Maharashtra</li>
-                <li>Development of rapid, field-deployable AI detection tools</li>
-                <li>Disease quantification methodologies (DSI, AUDPC) for spinach</li>
-                <li>Integrated Disease Management (IDM) strategy optimization</li>
-                <li>Environmental risk modeling for Rabi season spinach cultivation</li>
+                <li>Building a two-stage YOLO-based spinach disease detection pipeline</li>
+                <li>Disease quantification using DSI, AUDPC, and affected area % analysis</li>
+                <li>Integrating a Groq AI chatbot for real-time disease management guidance</li>
+                <li>Developing an environmental risk dashboard for Downy Mildew forecasting</li>
+                <li>Creating a deployable full-stack web application for field use</li>
             </ul>
         </div>
         """, unsafe_allow_html=True)
